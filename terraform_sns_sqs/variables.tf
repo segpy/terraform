@@ -44,5 +44,4 @@ variable "lambda" {
     role    = string
     queue   = string
   })
-
 }

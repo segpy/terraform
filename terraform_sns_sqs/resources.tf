@@ -138,7 +138,6 @@ resource "aws_iam_role_policy" "lambda_role_sqs_policy" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "aws_lambda_function" "lambda_func" {
-
   filename      = "${path.module}/lambda/example.zip"
   function_name = var.lambda.name
   role          = aws_iam_role.lambda_role.arn
