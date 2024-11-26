@@ -140,8 +140,8 @@ resource "aws_iam_role_policy" "lambda_role_sqs_policy" {
 resource "aws_lambda_function" "lambda_func" {
   filename      = "${path.module}/lambda/example.zip"
   function_name = var.lambda.name
-  role          = aws_iam_role.lambda_role.arn
-  # role             = var.lambda.role
+  # role          = aws_iam_role.lambda_role.arn
+  role             = var.lambda.role
   handler          = var.lambda.handler
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   runtime          = var.lambda.runtime
@@ -159,9 +159,9 @@ resource "aws_lambda_function" "lambda_func" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "aws_lambda_event_source_mapping" "lambda_func_event_source" {
-  event_source_arn = aws_sqs_queue.sqs_queues["queue-1"].arn
-  # event_source_arn = var.lambda.queue
-  enabled       = true
-  function_name = aws_lambda_function.lambda_func.arn
-  batch_size    = 1
+  # event_source_arn = aws_sqs_queue.sqs_queues["queue-1"].arn
+  event_source_arn = var.lambda.queue
+  enabled          = true
+  function_name    = aws_lambda_function.lambda_func.arn
+  batch_size       = 1
 }
