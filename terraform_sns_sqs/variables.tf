@@ -35,3 +35,21 @@ variable "queues" {
     topic                = string
   }))
 }
+
+variable "lambda" {
+  type = object({
+    name    = string
+    handler = string
+    runtime = string
+    role    = string
+    queue   = string
+  })
+  default = {
+    name    = "terraform-lambda-example"
+    handler = "example.handler"
+    runtime = "nodejs18.x"
+    role    = "arn:aws:iam::036796669465:role/iam-role-ssm-proteccion-remediation-dev"
+    queue   = "arn:aws:sqs:us-east-1:036796669465:q-test-splunk-arqRef"
+  }
+
+}
