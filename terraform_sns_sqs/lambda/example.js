@@ -2,9 +2,9 @@
 import _ from "lodash";
 import moment from "moment";
 
-export const hello = async (event, context, callback) => {
+export const hello = async (event, context) => {
   const curried = _.curry(calculateDate);
-  callback(null, curried(moment().format())(event));
+  return curried(moment().format())(event);
 };
 
 const calculateDate = (datetime, days) => {
